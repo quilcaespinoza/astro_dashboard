@@ -12,5 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('layouts/admin');
-});
+  return  view("login");
+})->name("login");
+Route::post("/validate_user", "Controller@validate_user");
+
+// RUTA DE USUARIOS
+
+
+    Route::get("/form_register",  "Controller@form_register");
+    Route::get("/logout",  "Controller@logout");
+    Route::post("/valid_email",  "Controller@valid_email");
+    Route::post("/user_create", "Controller@user_create");
+

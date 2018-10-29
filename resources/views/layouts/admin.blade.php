@@ -1,8 +1,15 @@
+<?php
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>Aula Virtual</title>
     <!-- =============== VENDOR STYLES ===============-->
@@ -21,14 +28,24 @@
     <!-- WEATHER ICONS-->
     <link rel="stylesheet" href="vendor/weather-icons/css/weather-icons.css">
     <!-- =============== BOOTSTRAP STYLES ===============-->
-    <link rel="stylesheet" href="css/bootstrap.css" id="bscss">
+    <link rel="stylesheet" href="{{asset("css/bootstrap.css")}}">
     <!-- =============== APP STYLES ===============-->
-    <link rel="stylesheet" href="css/app.css" id="maincss">
-    <script src="js/ga.js"></script>
+    <link rel="stylesheet" href="{{asset("css/app.css")}}">
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/alertify.min.js"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/alertify.min.css"/>
+  <!-- Default theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/default.min.css"/>
+  <!-- Semantic UI theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/semantic.min.css"/>
+  <!-- Bootstrap theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/bootstrap.min.css"/>
+    {{--<script src="js/ga.js"></script>--}}
   </head>
   <body>
     <div class="wrapper">
-      
+
       <header class="topnavbar-wrapper">
         <nav class="navbar topnavbar">
           <div class="navbar-header">
@@ -110,13 +127,16 @@
                 <div class=" " id="user-block">
                   <div class="item user-block">
                     <div class="user-block-picture">
-                      <div class="user-block-status">
-                        <img class="img-thumbnail rounded-circle" src="img/user.jpg" alt="Avatar" width="60" height="60">
-                        <div class="circle bg-success circle-lg"></div>
+                      <div class="user-block-status" >
+                            <div class="img-thumbnail rounded-circle" style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center" >
+                                 <i class="fa fa-user fa-3x "></i>
+                              </div>
+                          {{--<img class="img-thumbnail rounded-circle" src="img/user.jpg" alt="Avatar" width="60" height="60">--}}
+                        {{--<div class="circle bg-success circle-lg"></div>--}}
                       </div>
                     </div>
                     <div class="user-block-info">
-                      <span class="user-block-name">Hello, Usuario</span>
+                      <span class="user-block-name"></span>
                       <span class="user-block-role">Administrador</span>
                     </div>
                   </div>
@@ -143,7 +163,7 @@
                 <ul class="sidebar-nav sidebar-subnav collapse" id="layout">
                   <li class="sidebar-subnav-header">Layouts</li>
                   <li class=" ">
-                    <a href="dashboard_h.html" title="Horizontal">
+                    <a href="" title="Horizontal">
                       <span>Horizontal</span>
                     </a>
                   </li>
@@ -174,10 +194,10 @@
                 <ul class="sidebar-nav sidebar-subnav collapse" id="forms">
                   <li class="sidebar-subnav-header">Forms</li>
                   <li class=" ">
-                    <a href="form-standard.html" title="Standard">
+                    <a href="" title="Standard">
                       <span data-localize="sidebar.nav.form.STANDARD">Standard</span>
                     </a>
-                  </li> 
+                  </li>
                 </ul>
               </li>
               <li class=" ">
@@ -188,12 +208,38 @@
                 <ul class="sidebar-nav sidebar-subnav collapse" id="charts">
                   <li class="sidebar-subnav-header">Charts</li>
                   <li class=" ">
-                    <a href="chart-flot.html" title="Flot">
+                    <a href="" title="Flot">
                       <span data-localize="sidebar.nav.chart.FLOT">Flot</span>
                     </a>
                   </li>
                 </ul>
               </li>
+
+              <li class=" ">
+                <a href="#users" title="Charts" data-toggle="collapse">
+                  <em class="icon-graph"></em>
+                  <span data-localize="sidebar.nav.chart.CHART">Usuarios</span>
+                </a>
+                <ul class="sidebar-nav sidebar-subnav collapse" id="users">
+                  <li class="sidebar-subnav-header">Charts</li>
+                  <li class=" ">
+                    <a href="form_register" title="Flot">
+                      <span data-localize="sidebar.nav.chart.FLOT">Agregar Usuario</span>
+                    </a>
+                    <a href="" title="Flot">
+                      <span data-localize="sidebar.nav.chart.FLOT">Ver Usuarios</span>
+                    </a>
+
+                  </li>
+                </ul>
+              </li>
+              <li >
+                <a href="logout">
+                  <em class="icon-graph"></em>
+                      Cerrar Sesión
+                </a>
+              </li>
+
             </ul>
           </nav>
         </div>
@@ -216,12 +262,12 @@
                       <a class="float-right" href="#" data-tool="card-collapse" data-toggle="tooltip" title="Collapse card">
                         <em class="fa fa-minus"></em>
                       </a>
-                      <div class="card-title">Inbound visitor statistics</div>
+                      <div class="card-title">@yield("title_menu")</div>
                     </div>
                     <div class="card-wrapper collapse show">
                       <div class="card-body">
-                        <h3>Index</h3>
-                        <!--@yield('content')-->
+                        @yield('content')
+
                       </div>
                     </div>
                   </div>
@@ -259,5 +305,6 @@
     <script src="vendor/jquery-slimscroll/jquery.slimscroll.js"></script>
     <!-- =============== APP SCRIPTS ===============-->
     <script src="js/app.js"></script>
+  @yield("after_scripts")
   </body>
 </html>
