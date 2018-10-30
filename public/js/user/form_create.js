@@ -45,7 +45,7 @@ $(document).ready( function ( ){
             dataType: "JSON",
             success: function (data) {
                 alertify.success(data.value);
-                window.location.href = "home";
+                // window.location.href = "form_register";
             }
         });
 
