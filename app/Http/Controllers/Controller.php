@@ -10,9 +10,25 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
+use DB;
+
+
+
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+
+//--------contructor -----------------------
+    public function __contructor() {
+
+    }
+
+
+
 
     public  function validate_user(Request $request) {
 //        $user = User::where("email", $request->input("email"))->where("password", $request->input("password"))->get();
@@ -64,4 +80,19 @@ class Controller extends BaseController
         Auth::logout();
         return redirect("/");
     }
+
+
+/*********** Ver usaurio **********************************/
+ public  function ver_usuario(Request $request) {
+    if ($request) {
+        $query=trim($request->get('searchText'));
+        $logins=DB::table('login')->where('nombre','LIKE','%'.$query.'%')
+        ->where('condicion','=','1')
+        ->orderBy('id','desc')
+        ->paginate(4);
+        return view('Users.ver_usuario',["logins"=>$logins,"searchText"=>$query]);
+        //dump($query);
+
+    }
+}
 }

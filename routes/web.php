@@ -23,4 +23,5 @@ Route::post("/validate_user", "Controller@validate_user");
     Route::get("/logout",  "Controller@logout");
     Route::post("/valid_email",  "Controller@valid_email");
     Route::post("/user_create", "Controller@user_create");
+    Route::get("/ver_usuario","Controller@ver_usuario");
 
