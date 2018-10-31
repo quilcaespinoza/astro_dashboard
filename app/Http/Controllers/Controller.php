@@ -22,77 +22,82 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-<<<<<<< HEAD
+
 
 //--------contructor -----------------------
     public function __contructor() {
 
     }
 
+//---------------------------------------------
 
 
 
-    public  function validate_user(Request $request) {
-//        $user = User::where("email", $request->input("email"))->where("password", $request->input("password"))->get();
-//        return dd($user);
-        if(Auth::attempt(["email"=> $request->input("email"), "password" => $request->input("password")])) {
-=======
-    public function validate_user(Request $request)
-    {
-        if (Auth::attempt(["email" => $request->input("email"), "password" => $request->input("password")])) {
->>>>>>> 43c910cc9dd07e9aac16adbc0812a331df8236e6
 
-            $user = Auth::user();
-            Auth::login($user);
-//        if( count($user )> 0) {
-//            Auth::login($user);
-            return redirect("Home");
-        } else {
-            return back();
-        }
-    }
+public function validate_user(Request $request)
+            {
+                if (Auth::attempt(["email" => $request->input("email"), "password" => $request->input("password")])) {
 
-    public function form_register()
-    {
-//        dump(Auth::user()->nombre);
-        return view("Users.form_user");
-    }
+                    $user = Auth::user();
+                    Auth::login($user);
+        //        if( count($user )> 0) {
+        //            Auth::login($user);
+                    return redirect("Home");
+                } else {
+                    return back();
+                }
+            }
 
-    public function user_create(Request $request)
-    {
-        $user = new User();
-        $user->nombre = $request->input("nombre");
-        $user->apellido = $request->input("apellido");
-        $user->email = $request->input("email");
-        $user->password = bcrypt($request->input("password"));
-        $user->save();
-//        return back();
-        return response()->json(["value" => "Se creó el ususario con éxito"]);
-    }
+            public function form_register()
+            {
+        //        dump(Auth::user()->nombre);
+                return view("Users.form_user");
+            }
 
-    public function valid_email(Request $request)
-    {
-        $email = $request->input("email");
-        $user = User::where("email", $email)->get();
+            public function user_create(Request $request)
+            {
+                $user = new User();
+                $user->nombre = $request->input("nombre");
+                $user->apellido = $request->input("apellido");
+                $user->email = $request->input("email");
+                $user->password = bcrypt($request->input("password"));
+                $user->save();
+        //        return back();
+                return response()->json(["value" => "Se creó el ususario con éxito"]);
+            }
 
-        if (count($user) > 0) {
-            $response = [
-                "value" => "Email ya registrado",
-                "status" => 500
-            ];
-        } else {
-            $response = ["value" => "Email disponible", "status" => 200];
-        }
+            public function valid_email(Request $request)
+            {
+                $email = $request->input("email");
+                $user = User::where("email", $email)->get();
 
-        return response()->json($response);
+                if (count($user) > 0) {
+                    $response = [
+                        "value" => "Email ya registrado",
+                        "status" => 500
+                    ];
+                } else {
+                    $response = ["value" => "Email disponible", "status" => 200];
+                }
 
-    }
+                return response()->json($response);
 
-    public function logout()
-    {
-        Auth::logout();
-        return redirect("/");
-    }
+            }
+
+            public function logout()
+            {
+                Auth::logout();
+                return redirect("/");
+            }
+
+
+
+
+
+
+
+
+
 
 
 /*********** Ver usaurio **********************************/
