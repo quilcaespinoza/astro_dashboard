@@ -28,9 +28,9 @@
     <!-- WEATHER ICONS-->
     <link rel="stylesheet" href="vendor/weather-icons/css/weather-icons.css">
     <!-- =============== BOOTSTRAP STYLES ===============-->
-    <link rel="stylesheet" href="{{asset("css/bootstrap.css")}}">
+    {{--<link rel="stylesheet" href="{{asset("css/bootstrap.css")}}">--}}
     <!-- =============== APP STYLES ===============-->
-    <link rel="stylesheet" href="{{asset("css/app.css")}}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <link rel="stylesheet" href="{{asset("css/app.css")}}">
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/alertify.min.js"></script>
 
   <!-- CSS -->
@@ -145,11 +145,11 @@
               <li class="nav-heading ">
                 <span data-localize="sidebar.heading.HEADER">Main Navigation</span>
               </li>
-              <li class=" ">
-                <a href="#dashboard" title="Dashboard" data-toggle="collapse">
+              <li >
+                <a href="{{route("index")}}" title="Dashboard" >
                   <div class="float-right badge badge-success">3</div>
                   <em class="icon-speedometer"></em>
-                  <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                  <span >Inicio</span>
                 </a>
                 <ul class="sidebar-nav sidebar-subnav collapse" id="dashboard">
                   <li class="sidebar-subnav-header active">Dashboard</li>
