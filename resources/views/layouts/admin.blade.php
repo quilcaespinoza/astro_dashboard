@@ -226,7 +226,7 @@
                     <a href="form_register" title="Flot">
                       <span data-localize="sidebar.nav.chart.FLOT">Agregar Usuario</span>
                     </a>
-                    <a href="" title="Flot">
+                    <a href="ver_usuario" title="Flot">
                       <span data-localize="sidebar.nav.chart.FLOT">Ver Usuarios</span>
                     </a>
 

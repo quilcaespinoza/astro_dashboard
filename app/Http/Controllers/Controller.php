@@ -11,11 +11,29 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
+use DB;
+
+
+
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-            public function validate_user(Request $request)
+
+
+//--------contructor -----------------------
+    public function __contructor() {
+
+    }
+
+
+
+
+
+    public function validate_user(Request $request)
             {
                 if (Auth::attempt(["email" => $request->input("email"), "password" => $request->input("password")])) {
 
@@ -29,13 +47,8 @@ class Controller extends BaseController
                 }
             }
 
-            public function form_register()
-            {
-        //        dump(Auth::user()->nombre);
-                return view("Users.form_user");
-            }
 
-            public function user_create(Request $request)
+    public function user_create(Request $request)
             {
                 $user = new User();
                 $user->nombre = $request->input("nombre");
@@ -45,10 +58,8 @@ class Controller extends BaseController
                 $user->save();
         //        return back();
                 return response()->json(["value" => "Se creó el ususario con éxito"]);
-            }
-
-            public function valid_email(Request $request)
-            {
+   }
+    public function valid_email(Request $request)  {
                 $email = $request->input("email");
                 $user = User::where("email", $email)->get();
 
@@ -70,4 +81,19 @@ class Controller extends BaseController
                 Auth::logout();
                 return redirect("/");
             }
+
+
+/*********** Ver usaurio **********************************/
+ public  function ver_usuario(Request $request) {
+        if ($request) {
+            $query=trim($request->get('searchText'));
+            $logins=DB::table('login')->where('nombre','LIKE','%'.$query.'%')
+            ->where('condicion','=','1')
+            ->orderBy('id','desc')
+            ->paginate(4);
+            return view('Users.ver_usuario',["logins"=>$logins,"searchText"=>$query]);
+            //dump($query);
+
+        }
+    }
 }
