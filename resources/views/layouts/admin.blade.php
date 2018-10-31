@@ -1,5 +1,6 @@
 <?php
 
+$persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where id NOT in (select persona_id from usuario)");
 
 
 ?>
@@ -147,13 +148,19 @@
               </li>
               <li >
                 <a href="{{route("index")}}" title="Dashboard" >
-                  <div class="float-right badge badge-success">3</div>
+                  <div class="float-right badge badge-danger">{{count($persons)}}</div>
                   <em class="icon-speedometer"></em>
-                  <span >Inicio</span>
+                  <span >Pendientes</span>
                 </a>
-                <ul class="sidebar-nav sidebar-subnav collapse" id="dashboard">
-                  <li class="sidebar-subnav-header active">Dashboard</li>
-                </ul>
+
+              </li>
+              <li >
+                <a href="{{route("all_request")}}" title="Dashboard" >
+                  {{--<div class="float-right badge badge-danger">{{count($persons)}}</div>--}}
+                  <em class="icon-speedometer"></em>
+                  <span >Todo</span>
+                </a>
+
               </li>
               <li class=" ">
                 <a href="#layout" title="Layouts" data-toggle="collapse">
@@ -248,7 +255,7 @@
       <section class="section-container">
         <div class="content-wrapper">
           <div class="content-heading">
-            <div>Aula Virtual</div>
+            {{--<div>Aula Virtual</div>--}}
           </div>
           <div class="row">
             <div class="col-xl-12">
@@ -283,6 +290,7 @@
       </footer>
 
     </div>
+    @yield("modal")
 
     <!-- =============== VENDOR SCRIPTS ===============-->
     <!-- MODERNIZR-->

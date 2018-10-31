@@ -19,6 +19,9 @@ Route::post("/validate_user", "Controller@validate_user");
 // RUTA DE USUARIOS
 
     Route::get("/Home", "PersonaController@show_home")->name("index");
+    Route::get("/Request", "PersonaController@all_request")->name("all_request");
+
+
     Route::get("/form_register",  "Controller@form_register");
     Route::get("/logout",  "Controller@logout");
     Route::post("/valid_email",  "Controller@valid_email");

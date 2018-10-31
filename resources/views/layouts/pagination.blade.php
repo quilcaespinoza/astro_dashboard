@@ -2,14 +2,13 @@
     .pagination {
         width: 500px;
         /*background: red;*/
-        margin-left: 50px;
-        border: 1px solid dodgerblue;
+        /*margin-left: 50px;*/
+        border: .3px solid dodgerblue;
         display: flex;
-        /*border*/
         /*margin-right: auto;*/
     }
     .pagination li {
-        border:  1px solid dodgerblue;
+        border:  .3px solid dodgerblue;
         /*border-top:none ;*/
         /*border-bottom: none;*/
         width: 30px;
@@ -22,14 +21,13 @@
         display: block;
         text-align: center;
         color: #1598F6;
-        line-height: 2;
     }
      .active {
         color: white;
          background: dodgerblue;
     }
     .flag a {
-        font-size: 1.2em;
+        /*font-size: 1.2em;*/
 
     }
 </style>
