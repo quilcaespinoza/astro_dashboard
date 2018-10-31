@@ -76,12 +76,13 @@ class Controller extends BaseController
 
             }
 
-            public function logout()
-            {
+    public function logout(){
                 Auth::logout();
                 return redirect("/");
-            }
-
+    }
+    public  function form_register() {
+        return view("Users.form_user");
+    }
 
 /*********** Ver usaurio **********************************/
  public  function ver_usuario(Request $request) {
