@@ -3,7 +3,7 @@
 @section("content")
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Usuarios Logueados al Sistema <a href="/create"><button class="btn btn-primary">Crear Nuevo</button></a></h3>
+		<h3>Usuarios Logueados al Sistema <a href="form_register"><button class="btn btn-primary">Crear Nuevo</button></a></h3>
 		@include('Users.search')
 		
 	</div>
@@ -29,8 +29,8 @@
 					<td>{{$logi->apellido}}</td>
 					<td>{{$logi->email}}</td>
 					<td align="center">
-						<a href=""><button class="btn btn-primary"><i class="fa fa-pencil-alt"></i></button></a>
-						<a href=""><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
+						<a href="editar_usuario/{{$logi->id}}"><button class="btn btn-primary"><i class="fa fa-pencil-alt"></i></button></a>
+						<a href="eliminar_usuario/{{$logi->id}}"><button class="btn btn-danger" onclick="return confirm('Esta seguro de eliminar el registro?')"><i class="fa fa-trash"></i></button></a>
 
 					</td>
 				</tr>
