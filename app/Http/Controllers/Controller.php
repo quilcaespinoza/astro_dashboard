@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\LoginFormRequest;
 use DB;
 
 
@@ -97,4 +98,43 @@ class Controller extends BaseController
 
         }
     }
+
+
+
+
+/***********Editar usuario  *******************************/
+public function editar_usuario(Request $request,$id) {
+    $login=User::find($id);
+    
+    //return view('Users.editar_usuario',compact('login'));
+    return view('Users.editar_usuario', ['login'=>$login]);
+}
+
+/****************************** Guardar usuario **************************************/
+public function guardar_usuario(LoginFormRequest $request) {
+
+    $login=User::where('id','=',$request->input('id'))
+    ->update(['nombre'=>$request->input('nombre') ,'apellido'=>$request->input('apellido') , 'email'=>$request->input('email') , 'password'=>bcrypt($request->input('password'))]);
+    
+            $query=trim($request->get('searchText'));
+            $logins=DB::table('login')->where('nombre','LIKE','%'.$query.'%')
+            ->where('condicion','=','1')
+            ->orderBy('id','desc')
+            ->paginate(4);
+            return view('Users.ver_usuario',["logins"=>$logins,"searchText"=>$query]);
+
+    
+}
+
+
+/****************************** Elimninar usuario **************************************/
+        public function eliminar_usuario($id) {
+             $login=User::find($id);
+             $login->delete();
+             //Session::flash('message','Usuario eliminado');
+             return redirect::to('ver_usuario');
+        }
+
+
+
 }
