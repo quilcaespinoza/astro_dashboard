@@ -19,7 +19,11 @@ Route::post("/validate_user", "Controller@validate_user");
 // RUTA DE USUARIOS
 
     Route::get("/Home", "PersonaController@show_home")->name("index");
+    Route::get("/filter_requests", "PersonaController@filter_requests")->name("filter_requests");
+    Route::get("/delete_person/{id}", "PersonaController@delete_person")->name("delete_person");
     Route::get("/Request", "PersonaController@all_request")->name("all_request");
+    Route::post("/get_information_for_id", "PersonaController@get_information_for_id")->name("get_information_for_id");
+    Route::post("/sendMail_carta", "PersonaController@sendMail_carta")->name("sendMail_carta");
 
 
     Route::get("/form_register",  "Controller@form_register");
