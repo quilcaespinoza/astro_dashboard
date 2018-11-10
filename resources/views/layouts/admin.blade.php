@@ -11,23 +11,23 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="{{asset("img/logo3.png")}}">
     <title>Aula Virtual</title>
     <!-- =============== VENDOR STYLES ===============-->
     <!-- FONT AWESOME-->
-    <link rel="stylesheet" href="vendor/%40fortawesome/fontawesome-free-webfonts/css/fa-brands.css">
-    <link rel="stylesheet" href="vendor/%40fortawesome/fontawesome-free-webfonts/css/fa-regular.css">
-    <link rel="stylesheet" href="vendor/%40fortawesome/fontawesome-free-webfonts/css/fa-solid.css">
-    <link rel="stylesheet" href="vendor/%40fortawesome/fontawesome-free-webfonts/css/fontawesome.css">
+    <link rel="stylesheet" href="{{asset("vendor/%40fortawesome/fontawesome-free-webfonts/css/fa-brands.css")}}">
+    <link rel="stylesheet" href="{{asset("vendor/%40fortawesome/fontawesome-free-webfonts/css/fa-regular.css")}}">
+    <link rel="stylesheet" href="{{asset("vendor/%40fortawesome/fontawesome-free-webfonts/css/fa-solid.css")}}">
+    <link rel="stylesheet" href="{{asset("vendor/%40fortawesome/fontawesome-free-webfonts/css/fontawesome.css")}}">
     <!-- SIMPLE LINE ICONS-->
-    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="{{asset("vendor/simple-line-icons/css/simple-line-icons.css")}}">
     <!-- ANIMATE.CSS-->
-    <link rel="stylesheet" href="vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="{{asset("vendor/animate.css/animate.css")}}">
     <!-- WHIRL (spinners)-->
-    <link rel="stylesheet" href="vendor/whirl/dist/whirl.css">
+    <link rel="stylesheet" href="{{asset("vendor/whirl/dist/whirl.css")}}">
     <!-- =============== PAGE VENDOR STYLES ===============-->
     <!-- WEATHER ICONS-->
-    <link rel="stylesheet" href="vendor/weather-icons/css/weather-icons.css">
+    <link rel="stylesheet" href="{{asset("vendor/weather-icons/css/weather-icons.css")}}">
     <!-- =============== BOOTSTRAP STYLES ===============-->
     {{--<link rel="stylesheet" href="{{asset("css/bootstrap.css")}}">--}}
     <!-- =============== APP STYLES ===============-->
@@ -43,19 +43,20 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
   <!-- Bootstrap theme -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/bootstrap.min.css"/>
     {{--<script src="js/ga.js"></script>--}}
+  <link rel="stylesheet" href="{{asset("css/general.css")}}">
   </head>
   <body>
     <div class="wrapper">
 
       <header class="topnavbar-wrapper">
-        <nav class="navbar topnavbar">
+        <nav class="navbar topnavbar" style="background: #FFB50C">
           <div class="navbar-header">
             <a class="navbar-brand" href="#/">
               <div class="brand-logo">
-                <img class="img-fluid" src="img/logo.png" alt="App Logo">
+                <img class="img-fluid" src="{{asset("img/logo.png")}}" width="50px" height="100px" alt="App Logo">
               </div>
               <div class="brand-logo-collapsed">
-                <img class="img-fluid" src="img/logo-single.png" alt="App Logo">
+                <img class="img-fluid" src="{{asset("img/logo.png")}}" alt="App Logo">
               </div>
             </a>
           </div>
@@ -69,47 +70,48 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
               </a>
             </li>
           </ul>
-          <ul class="navbar-nav flex-row">
-            <li class="nav-item">
-              <a class="nav-link" href="#" data-search-open="">
-                <em class="icon-magnifier"></em>
-              </a>
-            </li>
-            <li class="nav-item d-none d-md-block">
-              <a class="nav-link" href="#" data-toggle-fullscreen="">
-                <em class="fas fa-expand"></em>
-              </a>
-            </li>
-            <li class="nav-item dropdown dropdown-list">
-              <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-toggle="dropdown">
-                <em class="icon-user"></em>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right animated flipInX">
-                <div class="dropdown-item">
-                  <div class="list-group">
-                    <div class="list-group-item list-group-item-action">
-                      <div class="media">
-                        <div class="media-body">
-                          <dt>Usuario</dt>
-                          <input type="text" name="nombre" class="form-control">
-                          <dt>Password</dt>
-                          <input type="password" name="contra" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="list-group-item list-group-item-action">
-                      <div class="media">
-                        <div class="media-body">
-                          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-                          <button type="reset" class="btn btn-danger">Cancelar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
+          {{--<ul class="navbar-nav flex-row">--}}
+            {{--<li class="nav-item">--}}
+              {{--<a class="nav-link" href="#" data-search-open="">--}}
+                {{--<em class="icon-magnifier"></em>--}}
+              {{--</a>--}}
+            {{--</li>--}}
+            {{--<li class="nav-item d-none d-md-block">--}}
+              {{--<a class="nav-link" href="#" data-toggle-fullscreen="">--}}
+                {{--<em class="fas fa-expand"></em>--}}
+              {{--</a>--}}
+            {{--</li>--}}
+          {{--</ul>--}}
+            {{--<li class="nav-item dropdown dropdown-list">--}}
+              {{--<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-toggle="dropdown">--}}
+                {{--<em class="icon-user"></em>--}}
+              {{--</a>--}}
+              {{--<div class="dropdown-menu dropdown-menu-right animated flipInX">--}}
+                {{--<div class="dropdown-item">--}}
+                  {{--<div class="list-group">--}}
+                    {{--<div class="list-group-item list-group-item-action">--}}
+                      {{--<div class="media">--}}
+                        {{--<div class="media-body">--}}
+                          {{--<dt>Usuario</dt>--}}
+                          {{--<input type="text" name="nombre" class="form-control">--}}
+                          {{--<dt>Password</dt>--}}
+                          {{--<input type="password" name="contra" class="form-control">--}}
+                        {{--</div>--}}
+                      {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="list-group-item list-group-item-action">--}}
+                      {{--<div class="media">--}}
+                        {{--<div class="media-body">--}}
+                          {{--<button type="submit" class="btn btn-primary">Iniciar Sesión</button>--}}
+                          {{--<button type="reset" class="btn btn-danger">Cancelar</button>--}}
+                        {{--</div>--}}
+                      {{--</div>--}}
+                    {{--</div>--}}
+                  {{--</div>--}}
+                {{--</div>--}}
+              {{--</div>--}}
+            {{--</li>--}}
+          {{--</ul>--}}
           <form class="navbar-form" role="search" action="#">
             <div class="form-group">
               <input class="form-control" type="text" placeholder="Type and hit enter ...">
@@ -144,7 +146,7 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
                 </div>
               </li>
               <li class="nav-heading ">
-                <span data-localize="sidebar.heading.HEADER">Main Navigation</span>
+                <span data-localize="sidebar.heading.HEADER">Menú de Navegación</span>
               </li>
               <li >
                 <a href="{{route("index")}}" title="Dashboard" >
@@ -157,70 +159,70 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
               <li >
                 <a href="{{route("all_request")}}" title="Dashboard" >
                   {{--<div class="float-right badge badge-danger">{{count($persons)}}</div>--}}
-                  <em class="icon-speedometer"></em>
+                  <em class="icon-user"></em>
                   <span >Todo</span>
                 </a>
 
               </li>
-              <li class=" ">
-                <a href="#layout" title="Layouts" data-toggle="collapse">
-                  <em class="icon-layers"></em>
-                  <span>Layouts</span>
-                </a>
-                <ul class="sidebar-nav sidebar-subnav collapse" id="layout">
-                  <li class="sidebar-subnav-header">Layouts</li>
-                  <li class=" ">
-                    <a href="" title="Horizontal">
-                      <span>Horizontal</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-heading ">
-                <span data-localize="sidebar.heading.COMPONENTS">Components</span>
-              </li>
-              <li class=" ">
-                <a href="#elements" title="Elements" data-toggle="collapse">
-                  <em class="icon-chemistry"></em>
-                  <span data-localize="sidebar.nav.element.ELEMENTS">Elements</span>
-                </a>
-                <ul class="sidebar-nav sidebar-subnav collapse" id="elements">
-                  <li class="sidebar-subnav-header">Elements</li>
-                  <li class=" ">
-                    <a href="buttons.html" title="Buttons">
-                      <span data-localize="sidebar.nav.element.BUTTON">Buttons</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class=" ">
-                <a href="#forms" title="Forms" data-toggle="collapse">
-                  <em class="icon-note"></em>
-                  <span data-localize="sidebar.nav.form.FORM">Forms</span>
-                </a>
-                <ul class="sidebar-nav sidebar-subnav collapse" id="forms">
-                  <li class="sidebar-subnav-header">Forms</li>
-                  <li class=" ">
-                    <a href="" title="Standard">
-                      <span data-localize="sidebar.nav.form.STANDARD">Standard</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class=" ">
-                <a href="#charts" title="Charts" data-toggle="collapse">
-                  <em class="icon-graph"></em>
-                  <span data-localize="sidebar.nav.chart.CHART">Charts</span>
-                </a>
-                <ul class="sidebar-nav sidebar-subnav collapse" id="charts">
-                  <li class="sidebar-subnav-header">Charts</li>
-                  <li class=" ">
-                    <a href="" title="Flot">
-                      <span data-localize="sidebar.nav.chart.FLOT">Flot</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              {{--<li class=" ">--}}
+                {{--<a href="#layout" title="Layouts" data-toggle="collapse">--}}
+                  {{--<em class="icon-layers"></em>--}}
+                  {{--<span>Layouts</span>--}}
+                {{--</a>--}}
+                {{--<ul class="sidebar-nav sidebar-subnav collapse" id="layout">--}}
+                  {{--<li class="sidebar-subnav-header">Layouts</li>--}}
+                  {{--<li class=" ">--}}
+                    {{--<a href="" title="Horizontal">--}}
+                      {{--<span>Horizontal</span>--}}
+                    {{--</a>--}}
+                  {{--</li>--}}
+                {{--</ul>--}}
+              {{--</li>--}}
+              {{--<li class="nav-heading ">--}}
+                {{--<span data-localize="sidebar.heading.COMPONENTS">Components</span>--}}
+              {{--</li>--}}
+              {{--<li class=" ">--}}
+                {{--<a href="#elements" title="Elements" data-toggle="collapse">--}}
+                  {{--<em class="icon-chemistry"></em>--}}
+                  {{--<span data-localize="sidebar.nav.element.ELEMENTS">Elements</span>--}}
+                {{--</a>--}}
+                {{--<ul class="sidebar-nav sidebar-subnav collapse" id="elements">--}}
+                  {{--<li class="sidebar-subnav-header">Elements</li>--}}
+                  {{--<li class=" ">--}}
+                    {{--<a href="buttons.html" title="Buttons">--}}
+                      {{--<span data-localize="sidebar.nav.element.BUTTON">Buttons</span>--}}
+                    {{--</a>--}}
+                  {{--</li>--}}
+                {{--</ul>--}}
+              {{--</li>--}}
+              {{--<li class=" ">--}}
+                {{--<a href="#forms" title="Forms" data-toggle="collapse">--}}
+                  {{--<em class="icon-note"></em>--}}
+                  {{--<span data-localize="sidebar.nav.form.FORM">Forms</span>--}}
+                {{--</a>--}}
+                {{--<ul class="sidebar-nav sidebar-subnav collapse" id="forms">--}}
+                  {{--<li class="sidebar-subnav-header">Forms</li>--}}
+                  {{--<li class=" ">--}}
+                    {{--<a href="" title="Standard">--}}
+                      {{--<span data-localize="sidebar.nav.form.STANDARD">Standard</span>--}}
+                    {{--</a>--}}
+                  {{--</li>--}}
+                {{--</ul>--}}
+              {{--</li>--}}
+              {{--<li class=" ">--}}
+                {{--<a href="#charts" title="Charts" data-toggle="collapse">--}}
+                  {{--<em class="icon-graph"></em>--}}
+                  {{--<span data-localize="sidebar.nav.chart.CHART">Charts</span>--}}
+                {{--</a>--}}
+                {{--<ul class="sidebar-nav sidebar-subnav collapse" id="charts">--}}
+                  {{--<li class="sidebar-subnav-header">Charts</li>--}}
+                  {{--<li class=" ">--}}
+                    {{--<a href="" title="Flot">--}}
+                      {{--<span data-localize="sidebar.nav.chart.FLOT">Flot</span>--}}
+                    {{--</a>--}}
+                  {{--</li>--}}
+                {{--</ul>--}}
+              {{--</li>--}}
 
               <li class=" ">
                 <a href="#users" title="Charts" data-toggle="collapse">
@@ -228,7 +230,7 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
                   <span data-localize="sidebar.nav.chart.CHART">Usuarios</span>
                 </a>
                 <ul class="sidebar-nav sidebar-subnav collapse" id="users">
-                  <li class="sidebar-subnav-header">Charts</li>
+                  {{--<li class="sidebar-subnav-header">Charts</li>--}}
                   <li class=" ">
                     <a href="form_register" title="Flot">
                       <span data-localize="sidebar.nav.chart.FLOT">Agregar Usuario</span>
@@ -242,8 +244,8 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
               </li>
               <li >
                 <a href="logout">
-                  <em class="icon-graph"></em>
-                      Cerrar Sesión
+                  <em class="icon-close"></em>
+                  <span data-localize="sidebar.nav.chart.CHART">Cerrar Sesión</span>
                 </a>
               </li>
 
@@ -286,7 +288,7 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
       </section>
 
       <footer class="footer-container">
-        <span>&copy; Company</span>
+        <span>&copy; astrovision</span>
       </footer>
 
     </div>
@@ -294,25 +296,25 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
 
     <!-- =============== VENDOR SCRIPTS ===============-->
     <!-- MODERNIZR-->
-    <script src="vendor/modernizr/modernizr.custom.js"></script>
+    <script src="{{asset("vendor/modernizr/modernizr.custom.js")}}"></script>
     <!-- JQUERY-->
-    <script src="vendor/jquery/dist/jquery.js"></script>
+    <script src="{{asset("vendor/jquery/dist/jquery.js")}}"></script>
     <!-- BOOTSTRAP-->
-    <script src="vendor/popper.js/dist/umd/popper.js"></script>
-    <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="{{asset("vendor/popper.js/dist/umd/popper.js")}}"></script>
+    <script src="{{asset("vendor/bootstrap/dist/js/bootstrap.js")}}"></script>
     <!-- STORAGE API-->
-    <script src="vendor/js-storage/js.storage.js"></script>
+    <script src="{{asset("vendor/js-storage/js.storage.js")}}"></script>
     <!-- JQUERY EASING-->
-    <script src="vendor/jquery.easing/jquery.easing.js"></script>
+    <script src="{{asset("vendor/jquery.easing/jquery.easing.js")}}"></script>
     <!-- ANIMO-->
-    <script src="vendor/animo/animo.js"></script>
+    <script src="{{asset("vendor/animo/animo.js")}}"></script>
     <!-- SCREENFULL-->
-    <script src="vendor/screenfull/dist/screenfull.js"></script>
+    <script src="{{asset("vendor/screenfull/dist/screenfull.js")}}"></script>
     <!-- =============== PAGE VENDOR SCRIPTS ===============-->
     <!-- SLIMSCROLL-->
-    <script src="vendor/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="{{asset("vendor/jquery-slimscroll/jquery.slimscroll.js")}}"></script>
     <!-- =============== APP SCRIPTS ===============-->
-    <script src="js/app.js"></script>
+    <script src="{{asset("js/app.js")}}"></script>
   @yield("after_scripts")
   </body>
 </html>

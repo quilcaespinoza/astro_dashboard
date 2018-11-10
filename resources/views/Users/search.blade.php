@@ -5,7 +5,7 @@
 	<div class="input-group">
 		<input type="text" class="form-control" name="searchText"  placeholder="Ingrese el nombre del  usuario" value="{{$searchText}}">
 
-		<span class="input-group-btn">
+		<span class="input-group-btn" style="margin-left: 10px">
 			<button type="submit" class="btn btn-primary">Buscar</button>
 		</span>
 

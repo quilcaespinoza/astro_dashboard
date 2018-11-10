@@ -4,7 +4,7 @@
 
 @section("content")
     {{--<div style="background: red">--}}
-    <form action="filter_requests"  method="get">
+    <form action="filter_alll_requests"  method="get">
         <div class="form-group" style="width: 500px;">
             <div class="input-group">
                 <input type="search" name="query" class="form  form-control" placeholder="Buscar por Email">
@@ -32,19 +32,22 @@
                     <td class="td_lugar">{{utf8_decode($person->lugar_nacimiento)}}</td>
                     <td>{{utf8_decode($person->hora_nacimiento)}}</td>
                     <td align="center">
+                        <a href="{{route("reload_mail", $person->id)}}" style="background: teal; color: #fff" class="btn"><i class="fa fa-sync-alt"></i></a>
                         {{--<button class="btn btn-success"><i class="fa fa-user"></i></button>--}}
                         <button class="btn btn-primary btnCarta" id="{{$person->id}}"  data-toggle="modal" data-target="#modalFile"><i class="fa fa-file"></i></button>
 {{--                        <a href="{{route("delete_person", [$person->id])}}"  class="btn btn-danger"><i class="fa fa-trash"></i></a>--}}
-
+                       <a href="{{route("edit_person_form", $person->id)}}"  class="btn btn-warning" style="color: white"><i class="fa fa-pencil-alt"></i></a>
                     </td>
+
                 </tr>
+                </form>
 
             @endforeach
 
         </table>
         {{$persons->render("layouts.pagination")}}
     @else
-        <h1>No hay solicitudes pendientes</h1>
+        <h1>Correo no encontrado</h1>
 
     @endif
 

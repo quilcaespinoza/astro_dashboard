@@ -3,7 +3,7 @@
 @section("content")
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Usuarios Logueados al Sistema <a href="form_register"><button class="btn btn-primary">Crear Nuevo</button></a></h3>
+		<h3>Usuarios Logueados al Sistema <a href="form_register" style="margin-left: 10px;"><button class="btn btn-primary">Crear Nuevo</button></a></h3>
 		@include('Users.search')
 		
 	</div>

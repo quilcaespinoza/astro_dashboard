@@ -34,8 +34,7 @@ class Controller extends BaseController
 
 
 
-    public function validate_user(Request $request)
-            {
+    public function validate_user(Request $request) {
                 if (Auth::attempt(["email" => $request->input("email"), "password" => $request->input("password")])) {
 
                     $user = Auth::user();

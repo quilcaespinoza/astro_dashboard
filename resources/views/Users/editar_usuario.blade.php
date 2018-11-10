@@ -47,6 +47,7 @@
                 <label for="nombre">Contraseña</label>
                 <input type="password" name="password" id="password"  required placeholder="Contraseña" class="form-control">
             </div>
+
             
 
             

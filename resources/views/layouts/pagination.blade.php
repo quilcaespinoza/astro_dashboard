@@ -3,12 +3,12 @@
         width: 500px;
         /*background: red;*/
         /*margin-left: 50px;*/
-        border: .3px solid dodgerblue;
+        border: .3px solid #091D2E;
         display: flex;
         /*margin-right: auto;*/
     }
     .pagination li {
-        border:  .3px solid dodgerblue;
+        border:  .3px solid #091D2E;
         /*border-top:none ;*/
         /*border-bottom: none;*/
         width: 30px;
@@ -20,11 +20,11 @@
         width: 100%;
         display: block;
         text-align: center;
-        color: #1598F6;
+        color: #091D2E;
     }
      .active {
-        color: white;
-         background: dodgerblue;
+        color: #ffff;
+         background: #091D2E;
     }
     .flag a {
         /*font-size: 1.2em;*/

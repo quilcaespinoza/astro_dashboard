@@ -19,7 +19,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="#" class="active" id="login-form-link">Login</a>
+                            <h3>Intranet</h3>
                         </div>
 
                     </div>
@@ -40,7 +40,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit"  id="login-submit" tabindex="4" class="form-control btn btn-login btn-success" value="Log In">
+                                            <input type="submit"  id="login-submit" tabindex="4" class="form-control btn btn-login btn-success" value="Ingresar">
                                         </div>
                                     </div>
                                 </div>
