@@ -50,6 +50,7 @@
          @endforeach
 
     </table>
+        {!! $persons->render("layouts.pagination") !!}
     @else
         <h1>No hay solicitudes pendientes</h1>
 

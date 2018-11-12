@@ -1,8 +1,14 @@
 <?php
+use Illuminate\Support\Facades\Crypt;
 
-$persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where id NOT in (select persona_id from usuario)");
 
+//$persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where id NOT in (select persona_id from usuario) and imagen is null");
+$persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM usuario where  imagen is null and created_at > '2018-10-11' ");
+session_start();
 
+if(isset($_SESSION["usuario"])):
+  $usuario_session = $_SESSION["usuario"];
+  $id_encr = Crypt::encrypt($usuario_session["id"]);
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +18,7 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="icon" type="image/x-icon" href="{{asset("img/logo3.png")}}">
-    <title>Aula Virtual</title>
+    <title>Astrovision</title>
     <!-- =============== VENDOR STYLES ===============-->
     <!-- FONT AWESOME-->
     <link rel="stylesheet" href="{{asset("vendor/%40fortawesome/fontawesome-free-webfonts/css/fa-brands.css")}}">
@@ -70,48 +76,7 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
               </a>
             </li>
           </ul>
-          {{--<ul class="navbar-nav flex-row">--}}
-            {{--<li class="nav-item">--}}
-              {{--<a class="nav-link" href="#" data-search-open="">--}}
-                {{--<em class="icon-magnifier"></em>--}}
-              {{--</a>--}}
-            {{--</li>--}}
-            {{--<li class="nav-item d-none d-md-block">--}}
-              {{--<a class="nav-link" href="#" data-toggle-fullscreen="">--}}
-                {{--<em class="fas fa-expand"></em>--}}
-              {{--</a>--}}
-            {{--</li>--}}
-          {{--</ul>--}}
-            {{--<li class="nav-item dropdown dropdown-list">--}}
-              {{--<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-toggle="dropdown">--}}
-                {{--<em class="icon-user"></em>--}}
-              {{--</a>--}}
-              {{--<div class="dropdown-menu dropdown-menu-right animated flipInX">--}}
-                {{--<div class="dropdown-item">--}}
-                  {{--<div class="list-group">--}}
-                    {{--<div class="list-group-item list-group-item-action">--}}
-                      {{--<div class="media">--}}
-                        {{--<div class="media-body">--}}
-                          {{--<dt>Usuario</dt>--}}
-                          {{--<input type="text" name="nombre" class="form-control">--}}
-                          {{--<dt>Password</dt>--}}
-                          {{--<input type="password" name="contra" class="form-control">--}}
-                        {{--</div>--}}
-                      {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="list-group-item list-group-item-action">--}}
-                      {{--<div class="media">--}}
-                        {{--<div class="media-body">--}}
-                          {{--<button type="submit" class="btn btn-primary">Iniciar Sesión</button>--}}
-                          {{--<button type="reset" class="btn btn-danger">Cancelar</button>--}}
-                        {{--</div>--}}
-                      {{--</div>--}}
-                    {{--</div>--}}
-                  {{--</div>--}}
-                {{--</div>--}}
-              {{--</div>--}}
-            {{--</li>--}}
-          {{--</ul>--}}
+
           <form class="navbar-form" role="search" action="#">
             <div class="form-group">
               <input class="form-control" type="text" placeholder="Type and hit enter ...">
@@ -134,13 +99,12 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
                             <div class="img-thumbnail rounded-circle" style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center" >
                                  <i class="fa fa-user fa-3x "></i>
                               </div>
-                          {{--<img class="img-thumbnail rounded-circle" src="img/user.jpg" alt="Avatar" width="60" height="60">--}}
-                        {{--<div class="circle bg-success circle-lg"></div>--}}
+
                       </div>
                     </div>
                     <div class="user-block-info">
                       <span class="user-block-name"></span>
-                      <span class="user-block-role">Administrador</span>
+                      <span class="user-block-role"><?php echo $usuario_session["nombre"] ?></span>
                     </div>
                   </div>
                 </div>
@@ -148,6 +112,9 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
               <li class="nav-heading ">
                 <span data-localize="sidebar.heading.HEADER">Menú de Navegación</span>
               </li>
+              {{----}}
+
+              @if($usuario_session["perfil"] == 1)
               <li >
                 <a href="{{route("index")}}" title="Dashboard" >
                   <div class="float-right badge badge-danger">{{count($persons)}}</div>
@@ -162,68 +129,7 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
                   <em class="icon-user"></em>
                   <span >Todo</span>
                 </a>
-
               </li>
-              {{--<li class=" ">--}}
-                {{--<a href="#layout" title="Layouts" data-toggle="collapse">--}}
-                  {{--<em class="icon-layers"></em>--}}
-                  {{--<span>Layouts</span>--}}
-                {{--</a>--}}
-                {{--<ul class="sidebar-nav sidebar-subnav collapse" id="layout">--}}
-                  {{--<li class="sidebar-subnav-header">Layouts</li>--}}
-                  {{--<li class=" ">--}}
-                    {{--<a href="" title="Horizontal">--}}
-                      {{--<span>Horizontal</span>--}}
-                    {{--</a>--}}
-                  {{--</li>--}}
-                {{--</ul>--}}
-              {{--</li>--}}
-              {{--<li class="nav-heading ">--}}
-                {{--<span data-localize="sidebar.heading.COMPONENTS">Components</span>--}}
-              {{--</li>--}}
-              {{--<li class=" ">--}}
-                {{--<a href="#elements" title="Elements" data-toggle="collapse">--}}
-                  {{--<em class="icon-chemistry"></em>--}}
-                  {{--<span data-localize="sidebar.nav.element.ELEMENTS">Elements</span>--}}
-                {{--</a>--}}
-                {{--<ul class="sidebar-nav sidebar-subnav collapse" id="elements">--}}
-                  {{--<li class="sidebar-subnav-header">Elements</li>--}}
-                  {{--<li class=" ">--}}
-                    {{--<a href="buttons.html" title="Buttons">--}}
-                      {{--<span data-localize="sidebar.nav.element.BUTTON">Buttons</span>--}}
-                    {{--</a>--}}
-                  {{--</li>--}}
-                {{--</ul>--}}
-              {{--</li>--}}
-              {{--<li class=" ">--}}
-                {{--<a href="#forms" title="Forms" data-toggle="collapse">--}}
-                  {{--<em class="icon-note"></em>--}}
-                  {{--<span data-localize="sidebar.nav.form.FORM">Forms</span>--}}
-                {{--</a>--}}
-                {{--<ul class="sidebar-nav sidebar-subnav collapse" id="forms">--}}
-                  {{--<li class="sidebar-subnav-header">Forms</li>--}}
-                  {{--<li class=" ">--}}
-                    {{--<a href="" title="Standard">--}}
-                      {{--<span data-localize="sidebar.nav.form.STANDARD">Standard</span>--}}
-                    {{--</a>--}}
-                  {{--</li>--}}
-                {{--</ul>--}}
-              {{--</li>--}}
-              {{--<li class=" ">--}}
-                {{--<a href="#charts" title="Charts" data-toggle="collapse">--}}
-                  {{--<em class="icon-graph"></em>--}}
-                  {{--<span data-localize="sidebar.nav.chart.CHART">Charts</span>--}}
-                {{--</a>--}}
-                {{--<ul class="sidebar-nav sidebar-subnav collapse" id="charts">--}}
-                  {{--<li class="sidebar-subnav-header">Charts</li>--}}
-                  {{--<li class=" ">--}}
-                    {{--<a href="" title="Flot">--}}
-                      {{--<span data-localize="sidebar.nav.chart.FLOT">Flot</span>--}}
-                    {{--</a>--}}
-                  {{--</li>--}}
-                {{--</ul>--}}
-              {{--</li>--}}
-
               <li class=" ">
                 <a href="#users" title="Charts" data-toggle="collapse">
                   <em class="icon-graph"></em>
@@ -242,8 +148,29 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
                   </li>
                 </ul>
               </li>
+
+
+              {{----}}
+              @elseif($usuario_session["perfil"] == 2)
+                <li >
+                  <a href="{{route("User",$id_encr)}}" title="Dashboard" >
+                    {{--<div class="float-right badge badge-danger">{{count($persons)}}</div>--}}
+                    <em class="icon-camera"></em>
+                    <span >Mi Carta Astral</span>
+                  </a>
+                </li>
+
+
+                <li >
+                  <a href="{{route("show_information",$id_encr)}}" title="Dashboard" >
+                    {{--<div class="float-right badge badge-danger">{{count($persons)}}</div>--}}
+                    <em class="icon-user"></em>
+                    <span >Mi Perfil</span>
+                  </a>
+                </li>
+                @endif
               <li >
-                <a href="logout">
+                <a href="{{route("logout")}}">
                   <em class="icon-close"></em>
                   <span data-localize="sidebar.nav.chart.CHART">Cerrar Sesión</span>
                 </a>
@@ -318,3 +245,7 @@ $persons = \Illuminate\Support\Facades\DB::select("SELECT * FROM persona where i
   @yield("after_scripts")
   </body>
 </html>
+<?php else:
+//    header("location:login");
+       echo "fdssss";
+endif?>

@@ -12,10 +12,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\LoginFormRequest;
 use DB;
-
+use Illuminate\Support\Facades\DB as Database;
 
 
 
@@ -30,24 +31,57 @@ class Controller extends BaseController
 
     }
 
-
-
-
-
     public function validate_user(Request $request) {
-                if (Auth::attempt(["email" => $request->input("email"), "password" => $request->input("password")])) {
 
+                $email = $request->input("email");
+                $pass = $request->input("password");
+                $other = Database::select("select nombre,apellido,persona.id, imagen from usuario inner JOIN  persona on 
+                    usuario.persona_id = persona.id where usuario.user_nick = '$email' and usuario.user_pass = '$pass'");
+                if (Auth::attempt(["email" => $request->input("email"), "password" => $request->input("password")])) {
                     $user = Auth::user();
                     Auth::login($user);
-        //        if( count($user )> 0) {
-        //            Auth::login($user);
+                    session_start();
+                    $nombre =  $user->nombre . " " .$user->apellido;
+                    $arr_user = [
+                        "id" => $user->id,
+                        "nombre" =>$nombre,
+                        "perfil" => 1
+                    ];
+                    $_SESSION["usuario"] = $arr_user;
                     return redirect("Home");
-                } else {
+                }
+                else if(count($other) > 0){
+                    $nombre =   $other[0]->nombre . " " . $other[0]->apellido;
+                    $arr_user = [
+                        "id" => $other[0]->id,
+                        "nombre" =>$nombre,
+                        "perfil" => 2
+                    ];
+                     session_start();
+                      $_SESSION["usuario"] = $arr_user;
+                    return \redirect()->route("User", Crypt::encrypt([$other[0]->id]));
+//                    return \redirect()->route("User", [$other[0]->id]);1
+
+                }
+                else {
                     return back();
                 }
             }
 
+    public  function other_user($id) {
+        try{
+            $ids = Crypt::decrypt($id);
+            if($ids[0] != "") {
+                $other = Database::select("select  imagen from usuario where persona_id =$ids[0]");
+            }else {
+                $other = Database::select("select  imagen from usuario where persona_id =$ids");
+            }
+            return view("other_user", compact('other'));
+        }catch (\Exception $exception) {
+            return back();
+        }
 
+    }
     public function user_create(Request $request)
             {
                 $user = new User();
@@ -77,8 +111,12 @@ class Controller extends BaseController
             }
 
     public function logout(){
-                Auth::logout();
-                return redirect("/");
+
+        session_start();
+        session_destroy();
+//        unset($_SESSION["usuario"]);
+
+        return \redirect()->route("login");
     }
     public  function form_register() {
         return view("Users.form_user");
@@ -97,9 +135,6 @@ class Controller extends BaseController
 
         }
     }
-
-
-
 
 /***********Editar usuario  *******************************/
 public function editar_usuario(Request $request,$id) {

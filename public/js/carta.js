@@ -23,7 +23,7 @@ const btnCarta = document.querySelectorAll(".btnCarta")
                 dataType: "JSON",
                 data: {id: btnCarta[i].id, _token: $('meta[name="csrf-token"]').attr('content')},
                 success: function (data) {
-                    console.log(data)
+                    console.log(btnCarta[i].id)
 
                     nombre.value = data.nombre
                     apellido.value = data.apellido

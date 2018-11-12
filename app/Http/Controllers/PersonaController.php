@@ -14,7 +14,12 @@ class PersonaController extends Controller
 {
 
     public function show_home() {
-        $persons = DB::select("SELECT * FROM persona where id NOT in (select persona_id from usuario)");
+//        $persons = DB::select("SELECT * FROM persona where id NOT in (select persona_id from usuario)");
+//        $persons = DB::select("SELECT * FROM persona inner join usuario on persona.id = usuario.persona_id where
+//                imagen is NULL");
+        $persons = Persona::select("persona.id", "nombre", "apellido","email","fecha_nacimiento", "lugar_nacimiento","hora_nacimiento")->join("usuario","persona.id", "=", "usuario.persona_id")
+                        ->where("usuario.created_at", ">","2018-10-11")->whereNull("imagen")->paginate(10);
+//      dump($persons);
         return view("home", compact('persons'));
     }
 
@@ -64,13 +69,14 @@ class PersonaController extends Controller
                       "user_pass" => $request->input("email")
                 ]);
             }  else {
-                $carta = new MailCarta();
-                $carta->persona_id = $request->input("id");
-                $carta->imagen = $nombre_storage;
-                $carta->user_nick = $request->input("email");
-                $carta->perfil_id = 1;
-                $carta->user_pass = $request->input("email");
-                $carta->save();
+                $carta = MailCarta::where("persona_id", $request->input("id"))->update([
+                    "imagen" => $nombre_storage,
+                    "user_nick" => $request->input("email"),
+                    "perfil_id"=> 1,
+                    "user_pass" => $request->input("email"),
+                ]);
+//                $carta->persona_id = $request->input("id");
+
             }
 
 

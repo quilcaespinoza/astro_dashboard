@@ -14,7 +14,11 @@
 Route::get('/', function () {
   return  view("login");
 })->name("login");
-Route::post("/validate_user", "Controller@validate_user");
+Route::get("User/{id}",[
+    "uses" => "Controller@other_user",
+    "as" => "User"
+] );
+Route::post("/Inicio", "Controller@validate_user")->name("validate_user");
 
 // RUTA DE USUARIOS
 
@@ -31,11 +35,15 @@ Route::post("/validate_user", "Controller@validate_user");
 
 
     Route::get("/form_register",  "Controller@form_register");
-    Route::get("/logout",  "Controller@logout");
+    Route::get("/logout",  "Controller@logout")->name("logout");
     Route::post("/valid_email",  "Controller@valid_email");
     Route::post("/user_create", "Controller@user_create");
     Route::get("/ver_usuario","Controller@ver_usuario");
     Route::get("/editar_usuario/{id}","Controller@editar_usuario");
     Route::post("/guardar_usuario","Controller@guardar_usuario");
     Route::get('/eliminar_usuario/{id}',"Controller@eliminar_usuario");
+
+
+    Route::get("Perfil/{id}", "UsuarioController@show_information")->name("show_information");
+    Route::post("other_edit", "UsuarioController@other_edit")->name("other_edit");
 
